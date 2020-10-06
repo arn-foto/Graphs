@@ -25,8 +25,7 @@ class Graph:
     def get_neighbors(self, vertex_id):
         return self.vertices[vertex_id]
         
-
-
+        
 
     def bft(self, starting_vertex):
         q = Queue()
@@ -37,7 +36,8 @@ class Graph:
         while q.size() > 0:
             v = q.dequeue()
             if v not in visited:
-                print(v) #"visit" the node
+                # "visit" the node
+                print(v)
                 visited.add(v)
                 for neighbor in self.get_neighbors(v):
                     q.enqueue(neighbor)
@@ -58,7 +58,8 @@ class Graph:
         while q.size() > 0:
             v = q.pop()
             if v not in visited:
-                print(v) #"visit" the node
+                # "Visit" the node
+                print(v)
                 visited.add(v)
                 for neighbor in self.get_neighbors(v):
                     q.push(neighbor)
@@ -70,10 +71,10 @@ class Graph:
 
 
     def dft_recursive(self, starting_vertex, visited=None):
-        # instantiate if needed
+        # we need to keep track of visited nodes
         if visited is None:
             visited = set()
-        # start
+        # this will keep this from going into an infinit loop
         if starting_vertex not in visited:
             visited.add(starting_vertex)
             print(starting_vertex)
