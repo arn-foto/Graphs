@@ -18,9 +18,9 @@ class Graph:
     def add_edge(self, v1, v2):
         self.vertices[v1].add(v2)
         
-        """
-        Add a directed edge to the graph.
-        """
+        # """
+        # Add a directed edge to the graph.
+        # """
       
     def get_neighbors(self, vertex_id):
         return self.vertices[vertex_id]
@@ -40,10 +40,10 @@ class Graph:
                 for neighbor in self.get_neighbors(v):
                     q.enqueue(neighbor)
        
-        """
-        Print each vertex in breadth-first order
-        beginning from starting_vertex.
-        """
+        # """
+        # Print each vertex in breadth-first order
+        # beginning from starting_vertex.
+        # """
         
     def dft(self, starting_vertex):
         q = Stack()
@@ -58,27 +58,60 @@ class Graph:
                 visited.add(v)
                 for neighbor in self.get_neighbors(v):
                     q.push(neighbor)
-        """
-        Print each vertex in depth-first order
-        beginning from starting_vertex.
-        """
+        # """
+        # Print each vertex in depth-first order
+        # beginning from starting_vertex.
+        # """
 
-    def dft_recursive(self, starting_vertex):
-        """
-        Print each vertex in depth-first order
-        beginning from starting_vertex.
+    def dft_recursive(self, starting_vertex, visited=None):
+        # instantiate if needed
+        if visited is None:
+            visited = set()
 
-        This should be done using recursion.
-        """
-        pass  # TODO
+        # start
+        if starting_vertex not in visited:
+            visited.add(starting_vertex)
+            print(starting_vertex)
+            for next_vertex in self.get_neighbors(starting_vertex):
+                self.dft_recursive(next_vertex, visited)
 
+        # """
+        # Print each vertex in depth-first order
+        # beginning from starting_vertex.
+
+        # This should be done using recursion.
+        # """
+        
     def bfs(self, starting_vertex, destination_vertex):
-        """
-        Return a list containing the shortest path from
-        starting_vertex to destination_vertex in
-        breath-first order.
-        """
-        pass  # TODO
+        q = Queue()
+        visited = set()        
+        #Init
+        q.enqueue([starting_vertex])
+        
+        while q.size() < 0:
+        
+            path = q.dequeue()
+            # While the the queue isn't empty
+            v = path[-1]
+            
+            if v not in visited:
+                if v == starting_vertex:
+                    return path # Found it!!
+                
+                visited.add(v)
+                
+                for neighbor in self.get_neighbors(v):
+                    new_path = path + [neighbor]
+                    q.enqueue(new_path)
+                
+        return None
+     
+        # """
+        # Return a list containing the shortest path from
+        # starting_vertex to destination_vertex in
+        # breath-first order.
+        # """
+
 
     def dfs(self, starting_vertex, destination_vertex):
         """
